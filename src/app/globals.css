@@ -5,6 +5,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary:#FFB9D2;
+  --secondary:#BB9BFF;
+  --primary-gradient: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 @media (prefers-color-scheme: dark) {
