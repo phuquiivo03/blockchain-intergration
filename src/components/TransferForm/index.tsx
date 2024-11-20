@@ -1,36 +1,61 @@
 'use client'
 import { useEffect, useState } from "react";
-import { useCurrentAccount, useCurrentWallet, useDisconnectWallet, useSignTransaction, useSuiClient } from "@mysten/dapp-kit";
+import { useAccounts, useCurrentAccount, useCurrentWallet, useDisconnectWallet, useSignTransaction, useSuiClient } from "@mysten/dapp-kit";
 import { getFullnodeUrl, SuiClient } from '@mysten/sui.js/client';
 import { Transaction } from '@mysten/sui/transactions';
-const rpcUrl = getFullnodeUrl('devnet');
- import { useWallets } from "@mysten/dapp-kit";
+import { useWallets } from "@mysten/dapp-kit";
 import { TransactionBlock } from "@mysten/sui.js/transactions";
 import { toast } from "react-toastify";
+import { useDataContext } from "@/provider/DataContext";
 // create a client connected to devnet
-const client = new SuiClient({ url: rpcUrl });
 function TransferForm() {
+
+
     const {connectionStatus} = useCurrentWallet();
-    const network = 'devnet';
+    const {client, network} = useDataContext();
+    const account = useCurrentAccount();
+
     const [address, setAddress] = useState<string>("");
     const [amount, setAmount] = useState<number>(0);
     const tokenSymbol = 'SUI';
+
     const { mutateAsync: signTransaction } = useSignTransaction();
+
+    
     const handleSubmit = async () => {
         if(!dataValidation()) return;
         const tx = new Transaction();
         tx.setGasBudget(2000000);
         const [coin] = tx.splitCoins(tx.gas, [amount]);
         tx.transferObjects([coin], address); 
-        const { bytes, signature, reportTransactionEffects } = await signTransaction({
-            transaction: tx,
-            chain: 'sui:devnet',
-        });
-        const executeResult = await client.executeTransactionBlock({
-            transactionBlock: bytes,
-            signature
-        });
-        toast.success(<span className="font-[500] text-[13px]"> Transaction Successfully! <a onClick={() => open(`https://${network}.suivision.xyz/txblock/${executeResult.digest}`)} className="underline text-secondary cursor-pointer">View Transaction</ a></span>);
+        try{
+        
+            const { bytes, signature, reportTransactionEffects } = await signTransaction({
+                transaction: tx,
+                chain: `sui:${network}`,
+            });
+            const executeResult = await client.executeTransactionBlock({
+                transactionBlock: bytes,
+                signature
+            });
+            toast.success(<span className="font-[500] text-[13px]"> Transaction Successfully! <a onClick={() => open(`https://${network}.suivision.xyz/txblock/${executeResult.digest}`)} className="underline text-secondary cursor-pointer">View Transaction</ a></span>);
+            handleSaveHistory(executeResult);
+        } catch {
+            toast.error('Transaction Failed');
+        }
+    }
+
+    const handleSaveHistory = (res: any)=> {
+        
+        const data = {
+            reiver: address,
+            amount: amount,
+            timeStamp: Date.now(),
+            digest: res?.digest
+        }
+        const history = JSON.parse(localStorage.getItem(`transferHistory${account?.address}`) || '[]');
+        history.push(data);
+        localStorage.setItem(`transferHistory${account?.address}`, JSON.stringify(history));
     }
 
     const dataValidation = () => {

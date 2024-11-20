@@ -29,15 +29,15 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-        <DataProvider initNetwork="">
         
               
+                <DataProvider initNetwork="">
               <DefaultLayout>
-                {children}
-              <ToastContainer />
+                    {children}
+                  <ToastContainer />
               </DefaultLayout>
+                </DataProvider>
 			
-    </DataProvider>
           </body>
     </html>
   );
