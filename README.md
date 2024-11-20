@@ -6,7 +6,8 @@ This repository is designed to build a simple, user-friendly, and functional int
 - Change the network (testnet - devnet)
 - View transfer history
 
-![image](https://github.com/user-attachments/assets/10d43694-42b6-400b-814d-fa81490a454d)
+![933_1x_shots_so](https://github.com/user-attachments/assets/8500c9f1-38f2-4f54-b050-4d9265c23849)
+
 
 ## Technical
 - Nextjs14
@@ -96,6 +97,9 @@ You must switch your network on your wallet to make sure that the network (appli
 - On Sui Wallet: Click on the ⚙️ icon on the top right corner and change network.
 - On Suiet: Click on network name on top right corner and change network
 
+![62_1x_shots_so](https://github.com/user-attachments/assets/52d709fb-9482-4db8-9096-fd78e9eca39f)
+
+
 ***Transfer Token***
 
 ![image](https://github.com/user-attachments/assets/27b1b277-2072-4b3d-b486-3fc9cf1ec036)
@@ -107,6 +111,10 @@ You must switch your network on your wallet to make sure that the network (appli
 A toast message will be display to show the transaction status:
 
 ![image](https://github.com/user-attachments/assets/f3b5832d-59c7-4462-b071-ff3bc9b8d662)
+
+***View the transactions history***
+
+![image](https://github.com/user-attachments/assets/4ead65a2-a583-4946-aee4-e09aa778842d)
 
 
 ## Licences
