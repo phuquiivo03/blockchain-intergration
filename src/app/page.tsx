@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <DefaultLayout>
+    <>
             <div  className="h-[90vh] flex items-center justify-center"><TransferForm /></div>
-    </DefaultLayout>
+    </>
   );
 }
