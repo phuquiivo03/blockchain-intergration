@@ -8,6 +8,7 @@ This repository is designed to build a simple, user-friendly, and functional int
 
 ![933_1x_shots_so](https://github.com/user-attachments/assets/8500c9f1-38f2-4f54-b050-4d9265c23849)
 
+***🌈Demo: [blockchain-intergration-cdln.vercel.app](https://blockchain-intergration-cdln.vercel.app/)
 
 ## Technical
 - Nextjs14
@@ -63,6 +64,10 @@ handleSaveHistory(executeResult);
 - Clone this repo:
   ```bash
    git clone https://github.com/phuquiivo03/blockchain-intergration.git
+  ```
+- Move to project
+  ```bash
+  cd blockchain-intergration
   ```
 - Install dependencies (use --fore to overwrite the conflict code on Sui sdk):
   ```bash
