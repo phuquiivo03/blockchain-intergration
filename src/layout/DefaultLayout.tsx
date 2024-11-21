@@ -1,7 +1,7 @@
 'use client'
 import Heading from "@/layout/components/Heading";
 import {Poppins} from "next/font/google";
-import { DataProvider, useDataContext } from "@/provider/DataContext";
+import {  useDataContext } from "@/provider/DataContext";
 import { createNetworkConfig, SuiClientProvider, WalletProvider } from '@mysten/dapp-kit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getFullnodeUrl } from "@mysten/sui.js/client";

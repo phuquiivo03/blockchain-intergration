@@ -1,12 +1,10 @@
 'use client'
-import { useEffect, useState } from "react";
-import { useAccounts, useCurrentAccount, useCurrentWallet, useDisconnectWallet, useSignTransaction, useSuiClient } from "@mysten/dapp-kit";
-import { getFullnodeUrl, SuiClient } from '@mysten/sui.js/client';
+import {  useState } from "react";
+import {useCurrentAccount, useCurrentWallet, useSignTransaction } from "@mysten/dapp-kit";
 import { Transaction } from '@mysten/sui/transactions';
-import { useWallets } from "@mysten/dapp-kit";
-import { TransactionBlock } from "@mysten/sui.js/transactions";
 import { toast } from "react-toastify";
 import { useDataContext } from "@/provider/DataContext";
+import { SuiTransactionBlockResponse } from "@mysten/sui.js/client";
 // create a client connected to devnet
 function TransferForm() {
 
@@ -30,7 +28,7 @@ function TransferForm() {
         tx.transferObjects([coin], address); 
         try{
         
-            const { bytes, signature, reportTransactionEffects } = await signTransaction({
+            const { bytes, signature } = await signTransaction({
                 transaction: tx,
                 chain: `sui:${network}`,
             });
@@ -45,7 +43,7 @@ function TransferForm() {
         }
     }
 
-    const handleSaveHistory = (res: any)=> {
+    const handleSaveHistory = (res: SuiTransactionBlockResponse)=> {
         
         const data = {
             reiver: address,

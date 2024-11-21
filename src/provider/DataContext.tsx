@@ -16,7 +16,7 @@ interface DataContextType {
 export const DataContext = createContext<DataContextType | undefined>(undefined);
 
 // Create a provider component
-export const DataProvider = ({ children, initNetwork }: { children: ReactNode, initNetwork: string }) => {
+export const DataProvider = ({ children }: { children: ReactNode, initNetwork: string }) => {
     const [activePage, setActivePage] = useState<number>(0);
     const [network, setNetwork] = useState<'devnet'|'testnet' >('testnet')
     const rpcUrl = getFullnodeUrl(network == 'devnet' || network == 'testnet'? network : 'devnet');

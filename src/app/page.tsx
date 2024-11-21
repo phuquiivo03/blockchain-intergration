@@ -1,6 +1,4 @@
 import TransferForm from "@/components/TransferForm";
-import DefaultLayout from "@/layout/DefaultLayout";
-import Image from "next/image";
 
 
 export default function Home() {

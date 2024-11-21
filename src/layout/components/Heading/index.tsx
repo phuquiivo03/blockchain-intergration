@@ -3,10 +3,10 @@ import { DataContext, useDataContext } from "@/provider/DataContext";
 import HeadignButton from "../../../components/HeadingButton";
 import { useContext, useEffect, useState } from "react";
 import { Coins } from "lucide-react";
-import { ConnectButton, useAccounts, useCurrentWallet, useSuiClient } from '@mysten/dapp-kit';
-import { SuiClient, getFullnodeUrl } from "@mysten/sui.js/client";
+import { ConnectButton, useAccounts, useCurrentWallet } from '@mysten/dapp-kit';
 import { Copy, CheckCheck } from "lucide-react";
 import SelectBox from "@/components/SelectBox";
+import { CoinStruct } from "@mysten/sui.js/client";
 const pages = [
     {
         title: 'Home',
@@ -20,7 +20,7 @@ const pages = [
 function Heading() {
     const { client } = useDataContext();
     const accounts = useAccounts();
-    const [balance, setBalance] = useState<any>(null);
+    const [balance, setBalance] = useState<number>(0);
     const [active, setActive] = useState<boolean>(false);
     const {connectionStatus} = useCurrentWallet();
     const context =useContext(DataContext)
@@ -42,7 +42,7 @@ function Heading() {
             if(connectionStatus == 'connected') {
                 client.getCoins({
                     owner: accounts[0].address,
-                }).then(res => setBalance(res.data.length > 0? res.data.filter((coin: any) => coin.coinType == '0x2::sui::SUI')[0].balance:0));
+                }).then(res => setBalance(res.data.length > 0? parseInt(res.data.filter((coin: CoinStruct) => coin.coinType == '0x2::sui::SUI')[0].balance):0));
             }
         }
         , [connectionStatus])
